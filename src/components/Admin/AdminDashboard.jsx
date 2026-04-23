@@ -1,4 +1,3 @@
-import { getDefaultNormalizer } from "@testing-library/dom";
 import { Navigate, useNavigate } from "react-router-dom";
 
 function AdminDashboard(){
