@@ -11,9 +11,11 @@ function AdminDashboard(){
     return (
         <div>
     <h2>Welcome Admin!</h2>
-    <li>
-        <ul><a onClick={() => navigate("/admin/users")}>View All Users</a></ul>
-    </li><br/><br/>
+    <ul>
+        <li><a onClick={() => navigate("/admin/users")}>View All Users</a></li>
+        <li><a onClick={() => navigate("/admin/category/view")}>View All Categories</a></li>
+        <li><a onClick={() => navigate("/admin/category/add")}>Add New Categories</a></li>
+    </ul><br/><br/>
      <button onClick={handleLogOut}>LOGOUT</button>
     </div>
     );

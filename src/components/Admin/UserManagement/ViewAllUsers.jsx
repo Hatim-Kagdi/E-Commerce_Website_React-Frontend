@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { deleteUser, getUsers } from "../../services/userService";
+import { deleteUser, getUsers } from "../../../services/userService";
 
 
 function AdminUsers() {

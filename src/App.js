@@ -1,13 +1,16 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AdminUsers from "./components/Admin/ViewAllUsers";
-import UserEditForm from "./components/Admin/UserEditForm";
+import AdminUsers from "./components/Admin/UserManagement/ViewAllUsers";
+import UserEditForm from "./components/Admin/UserManagement/UserEditForm";
 import Login from "./components/Login";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Register from "./components/Register";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 import CustomerDashboard from "./components/Customer/CustomerDashboard";
 import VendorDashboard from "./components/Vendor/VendorDashboard";
+import ViewAllCategories from "./components/Admin/CategoryManagement/ViewAllCategory";
+import CategoryEditForm from "./components/Admin/CategoryManagement/CategoryEditForm";
+import CategoryAddForm from "./components/Admin/CategoryManagement/CategoryAddForm";
 
 function App() {
 return ( 
@@ -25,6 +28,16 @@ return (
         <Route path="/admin/dashboard" element={
             <ProtectedRoute allowedRole="ROLE_ADMIN"><AdminDashboard/></ProtectedRoute>
             }></Route>
+        <Route path="/admin/category/view" element={
+            <ProtectedRoute allowedRole="ROLE_ADMIN"><ViewAllCategories/></ProtectedRoute>
+        }>
+        </Route>
+        <Route path="/admin/category/add" element={
+            <ProtectedRoute allowedRole="ROLE_ADMIN"><CategoryAddForm/></ProtectedRoute>
+        }></Route>
+        <Route path="/admin/category/:id" element={
+            <ProtectedRoute allowedRole="ROLE_ADMIN"><CategoryEditForm/></ProtectedRoute>
+        }></Route>
         <Route path="/vendor/dashboard" element={
             <ProtectedRoute allowedRole="ROLE_VENDOR"><VendorDashboard/></ProtectedRoute>
             }></Route>
