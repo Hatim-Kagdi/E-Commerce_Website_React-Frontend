@@ -11,6 +11,10 @@ import VendorDashboard from "./components/Vendor/VendorDashboard";
 import ViewAllCategories from "./components/Admin/CategoryManagement/ViewAllCategory";
 import CategoryEditForm from "./components/Admin/CategoryManagement/CategoryEditForm";
 import CategoryAddForm from "./components/Admin/CategoryManagement/CategoryAddForm";
+import ProductAddForm from "./components/Vendor/ProductAddForm";
+import ViewMyProducts from "./components/Vendor/ViewMyProducts";
+import ProductEditForm from "./components/Vendor/ProductEditForm";
+import ViewAllProducts from "./components/Customer/ViewAllProducts";
 
 function App() {
 return ( 
@@ -19,6 +23,8 @@ return (
     <Route path="/" element={<Login />} />
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register/>}></Route>
+{/* -------------------------------------------------------------------------------------------- */}
+         {/* Admin Routes */}
         <Route path="/admin/users" element={
             <ProtectedRoute allowedRole="ROLE_ADMIN"><AdminUsers/></ProtectedRoute>}>
             </Route>
@@ -28,7 +34,7 @@ return (
         <Route path="/admin/dashboard" element={
             <ProtectedRoute allowedRole="ROLE_ADMIN"><AdminDashboard/></ProtectedRoute>
             }></Route>
-        <Route path="/admin/category/view" element={
+        <Route path="/admin/categories" element={
             <ProtectedRoute allowedRole="ROLE_ADMIN"><ViewAllCategories/></ProtectedRoute>
         }>
         </Route>
@@ -38,11 +44,27 @@ return (
         <Route path="/admin/category/:id" element={
             <ProtectedRoute allowedRole="ROLE_ADMIN"><CategoryEditForm/></ProtectedRoute>
         }></Route>
+{/* -------------------------------------------------------------------------------------------- */}
+        {/* Vendor Routes */}
         <Route path="/vendor/dashboard" element={
             <ProtectedRoute allowedRole="ROLE_VENDOR"><VendorDashboard/></ProtectedRoute>
             }></Route>
+        <Route path="/vendor/product/add" element={
+            <ProtectedRoute allowedRole="ROLE_VENDOR"><ProductAddForm/></ProtectedRoute>
+            }></Route>
+        <Route path="/vendor/products" element={
+            <ProtectedRoute allowedRole="ROLE_VENDOR"><ViewMyProducts/></ProtectedRoute>
+            }></Route>
+        <Route path="/vendor/product/:productId" element={
+            <ProtectedRoute allowedRole="ROLE_VENDOR"><ProductEditForm/></ProtectedRoute>
+            }></Route>
+{/* -------------------------------------------------------------------------------------------- */}
+        {/* Customer Routes */}
         <Route path="/customer/dashboard" element={
             <ProtectedRoute allowedRole="ROLE_CUSTOMER"><CustomerDashboard/></ProtectedRoute>
+            }></Route>
+        <Route path="/customer/products" element={
+            <ProtectedRoute allowedRole="ROLE_CUSTOMER"><ViewAllProducts/></ProtectedRoute>
             }></Route>
     
 </Routes>

@@ -1,6 +1,6 @@
 import { apiRequest } from "./api";
 
-export const getAllCategories = () => apiRequest("/admin/category");
+export const getAllCategories = () => apiRequest("/admin/categories");
 
 export const getCategoryById = (id) => apiRequest(`/admin/category/${id}`);
 

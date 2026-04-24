@@ -24,6 +24,7 @@ function Login(){
         if(response.ok){
             localStorage.setItem("token", data.token);
             localStorage.setItem("role", data.role);
+            localStorage.setItem("userId" , data.userId);
 
             if(data.role === "ROLE_ADMIN"){
                 navigate("/admin/dashboard");
@@ -32,8 +33,6 @@ function Login(){
             }else if(data.role === "ROLE_CUSTOMER"){
                 navigate("/customer/dashboard");
             }
-
-            
         }else{
             alert("Login Failed!");
         }

@@ -13,14 +13,26 @@ const fetchCatgories = async () => {
     }catch(err){
         console.error(err);
     }
-}
+};
 
 useEffect(() => { fetchCatgories();} , []);
 
 const handleDelete = async (id) => {
-    if(window.confirm("Delete this Category?"));
-    await deleteCategory(id);
-    fetchCatgories();
+   const confirmDelete = window.confirm("Are you sure you want to delete this Category?");
+    
+    if (confirmDelete) {
+        try {
+            // 1. Wait for the server to finish deleting
+            await deleteCategory(id);
+            // 2. Alert the user (Optional but good UX)
+            alert("Category deleted successfully!");
+            // 3. RE-FETCH the data to update the table automatically
+            fetchCatgories(); 
+        } catch (err) {
+            console.error("Delete failed:", err);
+            alert("Failed to delete category");
+        }
+    }
 }
 return (
     <div>
