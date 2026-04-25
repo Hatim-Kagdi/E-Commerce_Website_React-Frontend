@@ -8,6 +8,7 @@ function ProductEditForm(){
 const { productId } = useParams();
 const navigate = useNavigate();
 const [categories , setCategories] = useState([]);
+const [imageFile, setImageFile] = useState(null);
 const [product , setProduct] = useState({
     productName : "",
     productDescription :"",
@@ -52,17 +53,29 @@ const handleChange = (e) =>{
     });
 };
 
+const handleImageUpload = (e) =>{
+    setImageFile(e.target.files[0]);
+};
+
 const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const formData = new FormData();
     try{
 
         const payload = {
-            ...product,
+            productName: product.productName,
+            productDescription: product.productDescription,
+            productPrice: product.productPrice,
+            productStock: product.productStock,
+            productImageUrl: product.productImageUrl,
             category : {categoryId : product.categoryId},
             vendor : {userId : localStorage.getItem("userId")}
         };
-        await updateProduct(productId, payload);
+        formData.append("product" , JSON.stringify(payload));
+        if(imageFile){
+            formData.append("image", imageFile);
+        }
+        await updateProduct(productId, formData);
         alert("Product Data Updated!");
         navigate("/vendor/products");
     }catch(err){
@@ -78,37 +91,46 @@ return (
             Product Name : <input 
             name="productName"
             value={product.productName}
-            placeholder="Enter Product name..."
             onChange={handleChange}
-            required/><br/><br/>
+            /><br/><br/>
 
             Product Description : <textarea
             name="productDescription"
             value={product.productDescription}
-            placeholder="Enter Product Description..."
             onChange={handleChange}
-            required/><br/><br/>
+            /><br/><br/>
 
             Product Price : <input
             name="productPrice"
             value={product.productPrice}
-            placeholder="Enter Product Price...."
             onChange={handleChange}
-            required /><br/><br/>
+             /><br/><br/>
 
             Product Stock : <input
             name="productStock"
             value={product.productStock}
-            placeholder="Enter Product Stock...."
             onChange={handleChange}
-            required/><br/><br/>
+            /><br/><br/>
 
-            Product Image : <input
-            name="productImageUrl"
-            value={product.productImageUrl}
-            placeholder="Enter Image URL...."
-            onChange={handleChange}
-            required/><br/><br/>
+            <div style={{ marginBottom: "15px" }}>
+            <p>Current Product Image:</p>
+            {product.productImageUrl ? (
+            <img 
+            src={`http://localhost:8080/uploads/${product.productImageUrl}`} 
+            alt="Current" 
+            style={{ width: "100px", height: "100px", borderRadius: "8px", border: "1px solid #ccc" }} 
+            />
+            ) : (
+            <span>No image uploaded</span>
+            )}
+            </div>
+
+            {/* The File Input - Remove 'required' so they can skip it */}
+            New Image (Optional): <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload} 
+            /><br/><br/>
 
             Category : <select name="categoryId" 
             value={product.categoryId} 

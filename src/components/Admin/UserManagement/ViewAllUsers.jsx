@@ -63,7 +63,8 @@ return (
             </thead>
 
             <tbody>
-                {users.map((user) => (
+                { users.length > 0 ? (
+                users.map((user) => (
                     <tr key={user.userId}>
                         <td>{user.userId}</td>
                         <td>{user.userName}</td>
@@ -83,7 +84,15 @@ return (
                             </button>
                         </td>
                     </tr>
-                ))}
+                ))
+                ) : (
+                    <tr>
+                    <td colSpan="9" style={{ textAlign: "center" }}>
+                    No products available at the moment.
+                    </td>
+                    </tr>
+                )
+            }
             </tbody>
         </table><br/><br/>
        <button onClick={() => navigate("/admin/dashboard")}>BACK</button>

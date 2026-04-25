@@ -7,6 +7,7 @@ function ProductAddForm(){
 
     const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
+    const [imageFile, setImageFile] = useState(null);
     const [products, setProducts] = useState({
         productName : "",
         productDescription : "",
@@ -35,12 +36,23 @@ function ProductAddForm(){
         });
     }
 
+    const handleFileChange = (e) => {
+        setImageFile(e.target.files[0]);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const formData = new FormData();
+
+
         try{
             const payload = {
-                ...products,
+                productName: products.productName,
+                productDescription: products.productDescription,
+                productPrice: products.productPrice,
+                productStock: products.productStock,
+                productImageUrl: products.productImageUrl,
                 category: {
                    categoryId : products.categoryId
                 },
@@ -48,7 +60,11 @@ function ProductAddForm(){
                     userId : localStorage.getItem("userId")
                 }
             };
-            await addProduct(payload);
+
+            formData.append("product", JSON.stringify(payload));
+            formData.append("image" , imageFile);
+
+            await addProduct(formData);
             alert("Product added succesfully!");
             navigate("/vendor/products");
         }catch(err){
@@ -90,10 +106,10 @@ return (
             required/><br/><br/>
 
             Product Image : <input
+            type = "file"
             name="productImageUrl"
-            value={products.productImageUrl}
-            placeholder="Enter Image URL...."
-            onChange={handleChange}
+            accept="image/*"
+            onChange={handleFileChange}
             required/><br/><br/>
 
             Category : <select name="categoryId" 

@@ -49,7 +49,8 @@ return (
                 </tr>
             </thead>
             <tbody>
-                {category.map(c =>(
+                { category.length > 0 ? (
+                category.map(c =>(
                     <tr key={c.categoryId}>
                         <td>{c.categoryId}</td>
                         <td>{c.categoryName}</td>
@@ -61,7 +62,14 @@ return (
                             <button onClick={() => handleDelete(c.categoryId)}>DELETE</button>
                         </td>
                     </tr>
-                ))}
+                ))
+            ) : (
+                <tr>
+                <td colSpan="9" style={{ textAlign: "center" }}>
+                    No Categories available at the moment.
+                </td>
+                </tr>
+            )}
             </tbody>
         </table><br/>
         <button onClick={() =>  navigate("/admin/dashboard")}>BACK</button>
