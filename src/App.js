@@ -18,6 +18,7 @@ import ViewAllProducts from "./components/Customer/ViewAllProducts";
 import AddTOCart from "./components/Customer/AddToCartForm";
 import AddToCart from "./components/Customer/AddToCartForm";
 import BuyProductNow from "./components/Customer/BuyNowForm";
+import ViewCartProducts from "./components/Customer/ViewCartProducts";
 
 function App() {
 return ( 
@@ -69,11 +70,14 @@ return (
         <Route path="/customer/products" element={
             <ProtectedRoute allowedRole="ROLE_CUSTOMER"><ViewAllProducts/></ProtectedRoute>
             }></Route>
-        <Route path="/customer/cart" element={
+        <Route path="/customer/cart/:productId" element={
             <ProtectedRoute allowedRole="ROLE_CUSTOMER"><AddToCart/></ProtectedRoute>
             }></Route>
         <Route path="/customer/buy" element={
             <ProtectedRoute allowedRole="ROLE_CUSTOMER"><BuyProductNow/></ProtectedRoute>
+            }></Route>
+        <Route path="/customer/cart" element={
+            <ProtectedRoute allowedRole="ROLE_CUSTOMER"><ViewCartProducts/></ProtectedRoute>
             }></Route>
 </Routes>
 </BrowserRouter>

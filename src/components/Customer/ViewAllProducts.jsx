@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllProductsForCustomer } from "../../services/customerService";
+import { addProductToCart } from "../../services/cartService";
 
 function ViewAllProducts(){
     const navigate = useNavigate();
@@ -51,7 +52,7 @@ function ViewAllProducts(){
                             <td>{p.categoryName}</td>
                             <td>{p.vendorName}</td>
                             <td>
-                                <button onClick={() => navigate("/customer/cart")}>ADD TO CART</button>
+                                <button onClick={() => navigate(`/customer/cart/${p.productId}`)}>ADD TO CART</button>
                                 <button onClick={() => navigate("/customer/buy")}>BUY NOW</button>
                             </td>
                         </tr>
