@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { deleteCartItems, getAllCartProducts, updateCartItem } from "../../services/cartService";
+import { deleteCartItems, getAllCartProducts, updateCartItem } from "../../../services/cartService";
+import { checkOut } from "../../../services/orderService";
 
 function ViewCartProducts(){
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ function ViewCartProducts(){
             await updateCartItem(cartId, newQuantity);
             fetchCartItems();
         }catch(err){
-            alert("Failed to update : " + err.response?.data?.message || "Stock limit reached!");
+            alert("Stock limit reached!");
         }
     };
 
@@ -44,6 +45,20 @@ function ViewCartProducts(){
             console.error(err);
         }
         }
+    };
+
+    const handleCheckOut = async() => {
+        const userId = localStorage.getItem("userId");
+        if(window.confirm("Confirm Order Placement!")){
+            try{
+                await checkOut(userId);
+                alert("Order Placed!");
+                navigate("/customer/orders");
+            }catch(err){
+                alert("Order not placed!");
+                console.error(err);
+            }
+    }
     };
 
     const grandTotal = cart.reduce((sum, item) => sum + item.productTotal, 0);
@@ -86,13 +101,15 @@ function ViewCartProducts(){
                 ) : (
                       <tr>
                         <td colSpan="9" style={{ textAlign: "center" }}>
-                            No products added to cart at the moment.
+                            No products added to cart at the moment.<br/>
+                            <button onClick={() => navigate("/customer/products")}>ADD PRODUCTS TO CART</button>
                         </td>
                         </tr>
                 )}
                 </tbody>
             </table><br/><br/>
                 <h4>Grand Total : {grandTotal}</h4><br/><br/>
+                <button onClick={handleCheckOut}>PROCEED TO CHECKOUT</button><br/>
             <button onClick={() => navigate("/customer/dashboard")}>BACK</button>
         </div>
     );

@@ -11,14 +11,14 @@ import VendorDashboard from "./components/Vendor/VendorDashboard";
 import ViewAllCategories from "./components/Admin/CategoryManagement/ViewAllCategory";
 import CategoryEditForm from "./components/Admin/CategoryManagement/CategoryEditForm";
 import CategoryAddForm from "./components/Admin/CategoryManagement/CategoryAddForm";
-import ProductAddForm from "./components/Vendor/ProductAddForm";
-import ViewMyProducts from "./components/Vendor/ViewMyProducts";
-import ProductEditForm from "./components/Vendor/ProductEditForm";
 import ViewAllProducts from "./components/Customer/ViewAllProducts";
-import AddTOCart from "./components/Customer/AddToCartForm";
-import AddToCart from "./components/Customer/AddToCartForm";
-import BuyProductNow from "./components/Customer/BuyNowForm";
-import ViewCartProducts from "./components/Customer/ViewCartProducts";
+import ViewCartProducts from "./components/Customer/CartManagement/ViewCartProducts";
+import ViewOrders from "./components/Customer/OrderManagement/ViewOrder";
+import AddToCart from "./components/Customer/CartManagement/AddToCartForm";
+import ProductAddForm from "./components/Vendor/ProductManagement/ProductAddForm";
+import ViewMyProducts from "./components/Vendor/ProductManagement/ViewMyProducts";
+import ProductEditForm from "./components/Vendor/ProductManagement/ProductEditForm";
+import ViewPlacedOrder from "./components/Vendor/OrderManagement/ViewPlacedOrders";
 
 function App() {
 return ( 
@@ -62,6 +62,9 @@ return (
         <Route path="/vendor/product/:productId" element={
             <ProtectedRoute allowedRole="ROLE_VENDOR"><ProductEditForm/></ProtectedRoute>
             }></Route>
+        <Route path="/vendor/orders" element={
+            <ProtectedRoute allowedRole="ROLE_VENDOR"><ViewPlacedOrder/></ProtectedRoute>
+            }></Route>
 {/* -------------------------------------------------------------------------------------------- */}
         {/* Customer Routes */}
         <Route path="/customer/dashboard" element={
@@ -73,11 +76,11 @@ return (
         <Route path="/customer/cart/:productId" element={
             <ProtectedRoute allowedRole="ROLE_CUSTOMER"><AddToCart/></ProtectedRoute>
             }></Route>
-        <Route path="/customer/buy" element={
-            <ProtectedRoute allowedRole="ROLE_CUSTOMER"><BuyProductNow/></ProtectedRoute>
-            }></Route>
         <Route path="/customer/cart" element={
             <ProtectedRoute allowedRole="ROLE_CUSTOMER"><ViewCartProducts/></ProtectedRoute>
+            }></Route>
+        <Route path="/customer/orders" element={
+            <ProtectedRoute allowedRole="ROLE_CUSTOMER"><ViewOrders/></ProtectedRoute>
             }></Route>
 </Routes>
 </BrowserRouter>

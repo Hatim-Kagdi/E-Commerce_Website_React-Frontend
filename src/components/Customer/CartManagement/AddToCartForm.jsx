@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { addProductToCart } from "../../services/cartService";
-import { getProductById } from "../../services/productService";
+import { addProductToCart } from "../../../services/cartService";
+import { getProductById } from "../../../services/productService";
 
 function AddToCart(){
     const navigate = useNavigate();
@@ -31,7 +31,7 @@ function AddToCart(){
             alert("Product added to cart!");
             navigate("/customer/products");
         }catch(err){
-            alert("Product Not added to cart!");
+            alert("Product Not Added to cart!");
             console.error(err);
         }
     };

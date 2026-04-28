@@ -53,7 +53,6 @@ function ViewAllProducts(){
                             <td>{p.vendorName}</td>
                             <td>
                                 <button onClick={() => navigate(`/customer/cart/${p.productId}`)}>ADD TO CART</button>
-                                <button onClick={() => navigate("/customer/buy")}>BUY NOW</button>
                             </td>
                         </tr>
                 ))

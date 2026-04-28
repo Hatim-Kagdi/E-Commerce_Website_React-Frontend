@@ -17,7 +17,8 @@ function CustomerDashboard(){
 
         <ul>
             <li onClick={() => navigate("/customer/products")}>VIEW PRODUCTS</li>
-             <li onClick={() => navigate("/customer/cart")}>VIEW CART PRODUCTS</li>
+            <li onClick={() => navigate("/customer/cart")}>VIEW CART PRODUCTS</li>
+            <li onClick={() => navigate("/customer/orders")}>VIEW ORDERS </li>
         </ul>
 
         <button onClick={handleLogOut}>LOGOUT</button>

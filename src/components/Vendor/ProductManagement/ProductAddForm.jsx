@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllCategories } from "../../services/categoryService";
-import { addProduct } from "../../services/productService";
+import { getAllCategories } from "../../../services/categoryService";
+import { addProduct } from "../../../services/productService";
+
 
 function ProductAddForm(){
 
