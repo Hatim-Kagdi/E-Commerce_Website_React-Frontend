@@ -19,6 +19,9 @@ import ProductAddForm from "./components/Vendor/ProductManagement/ProductAddForm
 import ViewMyProducts from "./components/Vendor/ProductManagement/ViewMyProducts";
 import ProductEditForm from "./components/Vendor/ProductManagement/ProductEditForm";
 import ViewPlacedOrder from "./components/Vendor/OrderManagement/ViewPlacedOrders";
+import ViewVendorAnalytics from "./components/Vendor/Analytics/ViewVendorAnalytics";
+import ViewCustomerDetails from "./components/Admin/UserManagement/ViewCustomerDetails";
+import ViewVendorDetails from "./components/Admin/UserManagement/ViewVendorDetails";
 
 function App() {
 return ( 
@@ -48,6 +51,12 @@ return (
         <Route path="/admin/category/:id" element={
             <ProtectedRoute allowedRole="ROLE_ADMIN"><CategoryEditForm/></ProtectedRoute>
         }></Route>
+        <Route path="/admin/vendorDetails/:userId/:userRole" element={
+            <ProtectedRoute allowedRole="ROLE_ADMIN"><ViewVendorDetails/></ProtectedRoute>
+        }></Route>
+        <Route path="/admin/customerDetails/:userId/:userRole" element={
+            <ProtectedRoute allowedRole="ROLE_ADMIN"><ViewCustomerDetails/></ProtectedRoute>
+        }></Route>
 {/* -------------------------------------------------------------------------------------------- */}
         {/* Vendor Routes */}
         <Route path="/vendor/dashboard" element={
@@ -64,6 +73,9 @@ return (
             }></Route>
         <Route path="/vendor/orders" element={
             <ProtectedRoute allowedRole="ROLE_VENDOR"><ViewPlacedOrder/></ProtectedRoute>
+            }></Route>
+        <Route path="/vendor/analytics" element={
+            <ProtectedRoute allowedRole="ROLE_VENDOR"><ViewVendorAnalytics/></ProtectedRoute>
             }></Route>
 {/* -------------------------------------------------------------------------------------------- */}
         {/* Customer Routes */}

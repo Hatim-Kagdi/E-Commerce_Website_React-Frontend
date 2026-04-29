@@ -22,6 +22,20 @@ useEffect(() => {
     fetchUsers();
 }, [role]);
 
+const handleViewMoreDetails = async(userId, role) => {
+    try{
+        if(role === "ROLE_VENDOR"){
+        navigate(`/admin/vendorDetails/${userId}/${role}`);
+    }else if(role === "ROLE_CUSTOMER"){
+        navigate(`/admin/customerDetails/${userId}/${role}`);
+    }else{
+        alert("Choose a Vendor or customer");
+    }
+    }catch(err){
+        console.error(err);
+    }
+};
+
 const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this user?");
     
@@ -76,6 +90,9 @@ return (
                         <td>{new Date(user.userCreatedAt).toLocaleString()}</td>
                         <td>{new Date(user.userUpdatedAt).toLocaleString()}</td>
                         <td>
+                            <button onClick={() => handleViewMoreDetails(user.userId, user.role)}>
+                                View More Details
+                            </button>
                             <button onClick={() => navigate(`/admin/users/${user.userId}`)}>
                                 Edit
                             </button>
@@ -88,7 +105,7 @@ return (
                 ) : (
                     <tr>
                     <td colSpan="9" style={{ textAlign: "center" }}>
-                    No products available at the moment.
+                    No users found.
                     </td>
                     </tr>
                 )

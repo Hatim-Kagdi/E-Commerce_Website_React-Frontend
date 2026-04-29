@@ -19,6 +19,7 @@ function VendorDashboard(){
             <li onClick={() => navigate("/vendor/products")}>VIEW MY PRODUCTS</li>
             <li onClick={() => navigate("/vendor/product/add")}>ADD NEW PRODUCT</li>
             <li onClick={() => navigate("/vendor/orders")}>VIEW PLACED ORDERS</li>
+            <li onClick={() => navigate("/vendor/analytics")}>VIEW ANALYTICS</li>
         </ul><br/>
 
         <button onClick={handleLogOut}>LOGOUT</button>
